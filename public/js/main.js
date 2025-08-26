@@ -1,13 +1,24 @@
-const btnPlayGame = document.getElementById('playBtn')
-const btnCredits = document.getElementById('creditsBtn')
-const btnExit = document.getElementById('exitBtn')
+import { startWarningSequence } from "./warning_screen.js";
 
-// section menu_game
-const sectionMenugame = document.getElementById('menu_game') 
-// section adventencias
-const sectionPrecaution = document.getElementById('precaution')
+document.addEventListener('DOMContentLoaded', () => {
 
-btnPlayGame.addEventListener('click', () =>{
-    sectionPrecaution.style.display = 'flex'
-    sectionMenugame.style.display = 'none'
-})
+    const btnPlayGame = document.getElementById('playBtn')
+    const btnCredits = document.getElementById('creditsBtn')
+    const btnExit = document.getElementById('exitBtn')
+
+    // section menu_game
+    const sectionMenugame = document.getElementById('menu_game')
+    // section adventencias
+    const sectionPrecaution = document.getElementById('warning_screen')
+
+    btnPlayGame.addEventListener('click', () => {
+        sectionPrecaution.style.display = 'flex'
+        sectionMenugame.style.display = 'none'
+    })
+
+    startWarningSequence(() => {
+        sectionPrecaution.style.display = 'none';
+        // iniciar seccion de juego 
+        // gameContainer.style.display = 'flex';
+    })
+});

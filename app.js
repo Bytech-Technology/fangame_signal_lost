@@ -22,7 +22,9 @@ expressApp.set("view engine", "ejs");
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({ extended: true }));
 expressApp.use(express.static(path.join(__dirname, "public")));
+expressApp.use(express.static(path.join(__dirname, "assets")))
 expressApp.use(express.static("components/"))
+
 // Rutas de ejemplo
 expressApp.get("/", (req, res) => {
     res.render("index", { title: "Hola desde Express + Electron" });

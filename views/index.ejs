@@ -6,13 +6,17 @@
     <title><%- title %></title>
     <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
+<body style="overflow: hidden;">
     <%- include('menu_game/menu_game') %>
 
     <!-- WARNING SCREEN -->
     <%- include('warning_screen/warning_screen') %>
 
+    <!-- OFICE SCREEN -->
+    <%- include('ofice/ofice') %> 
+
     <!-- JavaScripts -->
     <script src="js/main.js" type="module"></script>
+    <script src="js/ofice.js"></script>
 </body>
 </html>

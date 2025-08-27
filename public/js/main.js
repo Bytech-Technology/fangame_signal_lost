@@ -21,6 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
             sectionPrecaution.style.display = 'none';
             // iniciar seccion de juego 
             sectionOfice.style.display = 'block';
-    })
+        })
     })
 });

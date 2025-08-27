@@ -1,0 +1,37 @@
+.ofice {
+    position: relative;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+}
+
+.ofice__panorama {
+    display: flex;
+    width: 300%;
+    height: 100%;
+    transform: translateX(-100vw);
+    transition: transform 0.2s ease-out;
+}
+
+.ofice_view {
+  width: 100vw;
+  height: 100vh;
+  flex-shrink: 0;
+}
+
+.hover-zone {
+    position: absolute;
+    top: 0;
+    width: 5%;
+    height: 100%;
+    background: rgba(0, 0, 0, .3);
+    z-index: 10;
+}
+
+#hover-left {
+    left: 0;
+}
+
+#hover-right {
+    right: 0;
+}

@@ -16,12 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
     btnPlayGame.addEventListener('click', () => {
         sectionPrecaution.style.display = 'flex'
         sectionMenugame.style.display = 'none'
-    })
 
-    startWarningSequence(() => {
-        sectionPrecaution.style.display = 'none';
-        // iniciar seccion de juego 
-        sectionOfice.style.display = 'block';
-        // gameContainer.style.display = 'flex';
+        startWarningSequence(() => {
+            sectionPrecaution.style.display = 'none';
+            // iniciar seccion de juego 
+            sectionOfice.style.display = 'block';
+        })
     })
 });

@@ -1,57 +1,68 @@
-document.getElementById("left_door").addEventListener("click", () => {
+// ofice.js
+export default class Office {
+  constructor() {
+    this.wrapper = document.getElementById("ofice__panorama");
+    this.currentX = -100; // posición inicial en vw (centro = -100vw)
+    this.interval = null;
+    this.speed = 5; // velocidad (vw por frame)
+
+    // inicializar eventos
+    this._bindUI();
+    this._updatePosition();
+  }
+
+  /** ----------------- PUBLIC API ----------------- **/
+
+  openLeftDoor() {
     console.log("Left door clicked");
-});
+    // lógica extra de puerta izquierda
+  }
 
-document.getElementById("right_door").addEventListener("click", () => {
-    console.log("right door clicked");
-});
+  openRightDoor() {
+    console.log("Right door clicked");
+    // lógica extra de puerta derecha
+  }
 
-document.getElementById("computer_camera").addEventListener("click", () => {
-    console.log("camera compute clicked");
-});
+  openCameras() {
+    console.log("Camera computer clicked");
+    // lógica para abrir el monitor de cámaras
+  }
 
+  /** ----------------- INTERNAL METHODS ----------------- **/
 
-const wrapper = document.getElementById("ofice__panorama");
-let currentX = -100; // posición inicial en vw (centro = -100vw)
-let interval = null;
-const speed = 5; // velocidad (vw por frame)
+  _bindUI() {
+    document.getElementById("left_door").addEventListener("click", () => this.openLeftDoor());
+    document.getElementById("right_door").addEventListener("click", () => this.openRightDoor());
+    document.getElementById("computer_camera").addEventListener("click", () => this.openCameras());
 
-function updatePosition() {
-  wrapper.style.transform = `translateX(${currentX}vw)`;
-}
+    // Hover zonas
+    document.getElementById("hover-left").addEventListener("mouseenter", () => this._startMoving(1));
+    document.getElementById("hover-right").addEventListener("mouseenter", () => this._startMoving(-1));
+    document.getElementById("hover-left").addEventListener("mouseleave", () => this._stopMoving());
+    document.getElementById("hover-right").addEventListener("mouseleave", () => this._stopMoving());
+  }
 
-// Función para empezar a moverse en una dirección
-function startMoving(direction) {
-  stopMoving(); // aseguro que no haya dos intervals
-  interval = setInterval(() => {
-    // mover según la dirección
-    currentX += direction * speed;
+  _updatePosition() {
+    this.wrapper.style.transform = `translateX(${this.currentX}vw)`;
+  }
 
-    // limitar a rango [0, -200]
-    if (currentX > 0) currentX = 0;
-    if (currentX < -200) currentX = -200;
+  _startMoving(direction) {
+    this._stopMoving(); // aseguro que no haya dos intervals
+    this.interval = setInterval(() => {
+      this.currentX += direction * this.speed;
 
-    updatePosition();
-  }, 16); // ~60fps
-}
+      // limitar a rango [0, -200]
+      if (this.currentX > 0) this.currentX = 0;
+      if (this.currentX < -200) this.currentX = -200;
 
-// Frenar el movimiento
-function stopMoving() {
-  if (interval) {
-    clearInterval(interval);
-    interval = null;
+      this._updatePosition();
+    }, 16); // ~60fps
+  }
+
+  _stopMoving() {
+    if (this.interval) {
+      clearInterval(this.interval);
+      this.interval = null;
+    }
   }
 }
-
-// Hover zonas
-document.getElementById("hover-left").addEventListener("mouseenter", () => {
-  startMoving(1); // hacia derecha
-});
-document.getElementById("hover-right").addEventListener("mouseenter", () => {
-  startMoving(-1); // hacia izquierda
-});
-document.getElementById("hover-left").addEventListener("mouseleave", stopMoving);
-document.getElementById("hover-right").addEventListener("mouseleave", stopMoving);
-
-// Inicializar
-updatePosition();

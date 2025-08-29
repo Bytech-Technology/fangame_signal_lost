@@ -1,10 +1,17 @@
 import { startWarningSequence } from "./warning_screen.js";
 import Office from "./ofice.js";
+import { GAME_STATES } from "./config.js"
+import HUD from "./HUD.js";
+
 
 export class game {
     constructor(config = {}) {
         // configuracion base del juego
         this.config = {}
+        this.GAME_STATES = GAME_STATES;
+        // Estado global
+        this.state = GAME_STATES.MENU;
+
 
         // secciones html
         this.sectionMenu = document.getElementById('menu_game')
@@ -28,14 +35,47 @@ export class game {
         this.btnExit.addEventListener('click', () => this.exitGame());
     }
 
+    setState(newState) {
+        this.state = newState;
+        console.log("Nuevo estado:", this.state);
+
+        // Ocultamos todas las secciones
+        this.sectionMenu.style.display = 'none';
+        this.sectionWarning.style.display = 'none';
+        this.sectionOffice.style.display = 'none';
+
+        switch (newState) {
+            case this.GAME_STATES.MENU:
+                this.sectionMenu.style.display = 'flex';
+                break;
+
+            case this.GAME_STATES.WARNING:
+                this.sectionWarning.style.display = 'flex';
+                break;
+
+            case this.GAME_STATES.OFFICE:
+                this.sectionOffice.style.display = 'block';
+                break;
+
+            case this.GAME_STATES.CREDITS:
+                // TODO: mostrar créditos
+                break;
+
+            case this.GAME_STATES.NEXT_DAY:
+                // TODO: manejar transición al siguiente día
+                break;
+            
+            case this.GAME_STATES.GAME_OVER:
+                // TODO: mostrar pantalla de game over
+                break;
+        }
+    }
+
     start() {
         // Iniciar juego
-        console.log("iniciando juego con config:", this.config)
         this.isRunning = true
 
-        // Ocultar menu y mostrar advertencias
-        this.sectionMenu.style.display = 'none'
-        this.sectionWarning.style.display = 'flex'
+        this.setState(GAME_STATES.WARNING);
 
         // Llamar a la secuencia de advertencias
         startWarningSequence(() => {
@@ -45,23 +85,21 @@ export class game {
     }
 
     _onWarningComplete() {
-        // Ocultar advertencias y mostar oficina
-        this.sectionWarning.style.display = 'none'
-        this.sectionOffice.style.display = 'block'
+        this.setState(GAME_STATES.OFFICE);
 
-        console.log("juego iniciado: oficina cargada");
-
-        // instancia de la oficina
-        this.Office = new Office();
+        this.hud = new HUD(this);
+        this.Office = new Office(this.hud);
     }
 
     showCredits() {
         console.log("mostrando creditos");
+        this.setState(GAME_STATES.CREDITS);
         // TODO: implementar pantala de creditos 
     }
 
     exitGame() {
         console.log("saliendo del juego");
+        this.setState(GAME_STATES.GAME_OVER);
         // TODO: implementar salida del juego
 
     }

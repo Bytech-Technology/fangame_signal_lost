@@ -1,7 +1,9 @@
 // ofice.js
 export default class Office {
-  constructor() {
+  constructor(hud) {
     this.wrapper = document.getElementById("ofice__panorama");
+    this.hud = hud;
+
     this.currentX = -100; // posición inicial en vw (centro = -100vw)
     this.interval = null;
     this.speed = 5; // velocidad (vw por frame)
@@ -15,16 +17,22 @@ export default class Office {
 
   openLeftDoor() {
     console.log("Left door clicked");
+    this.hud.battery -= 1;
+    this.hud._updateUI();
     // lógica extra de puerta izquierda
   }
 
   openRightDoor() {
     console.log("Right door clicked");
+    this.hud.battery -= 1;
+    this.hud._updateUI();
     // lógica extra de puerta derecha
   }
 
   openCameras() {
     console.log("Camera computer clicked");
+    this.hud.battery -= 2;
+    this.hud._updateUI();
     // lógica para abrir el monitor de cámaras
   }
 

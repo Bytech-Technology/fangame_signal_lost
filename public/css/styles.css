@@ -1,6 +1,7 @@
 @import url(menu_game.css);
 @import url(warning_screen.css);
 @import url(ofice.css);
+@import url(HUD.css);
 
 :root{
     --primary-color:#fff;

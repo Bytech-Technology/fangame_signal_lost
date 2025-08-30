@@ -17,23 +17,17 @@ export default class Office {
 
   openLeftDoor() {
     console.log("Left door clicked");
-    this.hud.battery -= 1;
-    this.hud._updateUI();
-    // lógica extra de puerta izquierda
+    this.hud.useBattery(1);
   }
 
   openRightDoor() {
     console.log("Right door clicked");
-    this.hud.battery -= 1;
-    this.hud._updateUI();
-    // lógica extra de puerta derecha
+    this.hud.useBattery(1);
   }
 
   openCameras() {
     console.log("Camera computer clicked");
-    this.hud.battery -= 2;
-    this.hud._updateUI();
-    // lógica para abrir el monitor de cámaras
+    this.hud.useBattery(4);
   }
 
   /** ----------------- INTERNAL METHODS ----------------- **/

@@ -1,0 +1,13 @@
+{
+  "menu": {
+    "title_gamestart": "Start Game",
+    "title_settings": "Settings",
+    "title_credits": "Credits",
+    "exit": "Exit"
+  },
+  "settings": {
+    "title": "Settings",
+    "languageLabel": "Language:",
+    "back": "Back to Menu"
+  }
+}

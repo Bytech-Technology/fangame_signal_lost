@@ -2,12 +2,16 @@ import { startWarningSequence } from "./warning_screen.js";
 import Office from "./ofice.js";
 import { GAME_STATES } from "./config.js"
 import HUD from "./HUD.js";
-
+import { initSettings } from "./settings.js";
 
 export class game {
     constructor(config = {}) {
         // configuracion base del juego
-        this.config = {}
+        this.config = {
+            language: "en",
+            ...config
+        }
+
         this.GAME_STATES = GAME_STATES;
         // Estado global
         this.state = GAME_STATES.MENU;
@@ -17,9 +21,11 @@ export class game {
         this.sectionMenu = document.getElementById('menu_game')
         this.sectionWarning = document.getElementById('warning_screen')
         this.sectionOffice = document.getElementById('ofice')
+        this.sectionConfig = document.getElementById('settings')
 
         // botones
         this.btnPlay = document.getElementById('playBtn')
+        this.btnSettings = document.getElementById('settingsBtn')
         this.btnCredits = document.getElementById('CreditsBtn')
         this.btnExit = document.getElementById('exitBtn')
 
@@ -28,9 +34,13 @@ export class game {
 
         // inicializar eventos de menu
         this._initMenu()
+
+        initSettings(this);
     }
+
     _initMenu() {
         this.btnPlay.addEventListener('click', () => this.start());
+        this.btnSettings.addEventListener('click', () => this.showSettings());
         this.btnCredits.addEventListener('click', () => this.showCredits());
         this.btnExit.addEventListener('click', () => this.exitGame());
     }
@@ -43,6 +53,7 @@ export class game {
         this.sectionMenu.style.display = 'none';
         this.sectionWarning.style.display = 'none';
         this.sectionOffice.style.display = 'none';
+        this.sectionConfig.style.display = 'none';
 
         switch (newState) {
             case this.GAME_STATES.MENU:
@@ -55,6 +66,10 @@ export class game {
 
             case this.GAME_STATES.OFFICE:
                 this.sectionOffice.style.display = 'block';
+                break;
+
+            case this.GAME_STATES.SETTINGS:
+                this.sectionConfig.style.display = "flex"
                 break;
 
             case this.GAME_STATES.CREDITS:
@@ -89,6 +104,11 @@ export class game {
 
         this.hud = new HUD(this);
         this.Office = new Office(this.hud);
+    }
+
+    showSettings(){
+        console.log("mostrando configuracion");
+        this.setState(GAME_STATES.SETTINGS)
     }
 
     showCredits() {

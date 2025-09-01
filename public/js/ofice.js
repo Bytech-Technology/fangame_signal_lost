@@ -1,4 +1,6 @@
 // ofice.js
+import CameraSystem from "./camera.js"; 
+
 export default class Office {
   constructor(hud) {
     this.wrapper = document.getElementById("ofice__panorama");
@@ -11,6 +13,7 @@ export default class Office {
     // inicializar eventos
     this._bindUI();
     this._updatePosition();
+    this.cameraSystem = new CameraSystem("camera",this.hud);
   }
 
   /** ----------------- PUBLIC API ----------------- **/
@@ -27,7 +30,7 @@ export default class Office {
 
   openCameras() {
     console.log("Camera computer clicked");
-    this.hud.useBattery(4);
+    this.cameraSystem.showCamera(this.cameraSystem.currentCamera);
   }
 
   /** ----------------- INTERNAL METHODS ----------------- **/

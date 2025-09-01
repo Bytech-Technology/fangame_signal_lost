@@ -1,0 +1,23 @@
+.camera{
+    background: black;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    z-index: 99;
+}
+
+.camera svg{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 0 1rem 50px  0;
+    width: 50%;
+    height: 50%;
+}
+.camera svg g{
+    transition: all .3s ease-in-out;
+}
+.camera svg g:checked rect{
+    fill: #90f867;
+}

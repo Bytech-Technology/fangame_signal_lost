@@ -1,0 +1,13 @@
+{
+  "menu": {
+    "title_gamestart": "Comenzar Partida",
+    "title_settings": "Configuración",
+    "title_credits": "Créditos",
+    "exit": "Salir"
+  },
+  "settings": {
+    "title": "Configuración",
+    "languageLabel": "Idioma:",
+    "back": "Volver al menú"
+  }
+}

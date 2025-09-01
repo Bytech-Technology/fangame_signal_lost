@@ -3,6 +3,7 @@
 @import url(ofice.css);
 @import url(HUD.css);
 @import url(settings.css);
+@import url(camera.css);
 :root{
     --primary-color:#fff;
     --secundary-color:#000;

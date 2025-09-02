@@ -118,6 +118,6 @@ or open a pull request if you want to help improve the project.
 
 ## 📝 License
 
-This project is licensed under the MIT License.[LICENSE](./LICENSE)
+This project is licensed under the Non-Commercial Fangame License. [LICENSE](./LICENSE)
 
 <br>

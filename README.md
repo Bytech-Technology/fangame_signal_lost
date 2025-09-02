@@ -10,17 +10,17 @@
 <br>
 
 <p align="center">
-  Welcome to <strong>FNAF: Signal Lost</strong> — a thrilling, fully-playable console horror experience inspired by the Five Nights at Freddy's universe.  
-  Navigate cameras, manage power, and survive the night… all from your terminal.
+  Welcome to <strong>FNAF: Signal Lost</strong> — a thrilling, fully-playable horror experience inspired by the Five Nights at Freddy's universe.  
+  Explore the environment, monitor security cameras, manage power, and survive the night as you face unpredictable animatronics and tense scenarios.
 </p>
 
 <p align="center">
-  <img alt="Platform" src="https://img.shields.io/badge/platform-python-00ffff?logo=python&logoColor=000000" />
+  <img alt="Platform" src="https://img.shields.io/badge/JavaScript-00ffff?logo=JavaScript&logoColor=000000" />
   <img alt="Status" src="https://img.shields.io/badge/status-in%20development-ff00ff" />
-  <img alt="Interface" src="https://img.shields.io/badge/interface-command%20line-ff007f?logo=windows-terminal&logoColor=white" />
+  <img alt="Interface" src="https://img.shields.io/badge/interface-Web-ff007f?logo=chrome&logoColor=white" />
   <img alt="Genre" src="https://img.shields.io/badge/genre-horror-ff1a1a" />
-  <img alt="Style" src="https://img.shields.io/badge/style-text--based-6666ff" />
-  <img alt="Language" src="https://img.shields.io/badge/lang-es-cc00ff" />
+  <img alt="Style" src="https://img.shields.io/badge/style-Graphical-6666ff" />
+  <img alt="Language" src="https://img.shields.io/badge/lang-en-cc00ff" />
   <img alt="License" src="https://img.shields.io/github/license/Bytech-Technology/fangame_signal_lost" />
 </p>
 

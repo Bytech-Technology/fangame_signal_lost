@@ -21,7 +21,10 @@
   <img alt="Genre" src="https://img.shields.io/badge/genre-horror-ff1a1a" />
   <img alt="Style" src="https://img.shields.io/badge/style-Graphical-6666ff" />
   <img alt="Language" src="https://img.shields.io/badge/lang-en-cc00ff" />
-  <img alt="License" src="https://img.shields.io/github/license/Bytech-Technology/fangame_signal_lost" />
+<a href="./LICENSE">
+  <img alt="License" src="https://img.shields.io/badge/License-Non--Commercial%20Fangame-blue" />
+</a>
+
 </p>
 
 <br>

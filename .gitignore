@@ -1,4 +1,4 @@
 node_modules/
 .env
 package-lock.json
-logger.js
+public/js/logger.js

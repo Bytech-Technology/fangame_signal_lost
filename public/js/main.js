@@ -3,6 +3,7 @@ import Office from "./ofice.js";
 import { GAME_STATES } from "./config.js"
 import HUD from "./HUD.js";
 import { initSettings } from "./settings.js";
+import { startAnimatronics, stopAnimatronics } from "./animatronics.js";
 
 export class game {
     constructor(config = {}) {
@@ -104,6 +105,8 @@ export class game {
 
         this.hud = new HUD(this);
         this.Office = new Office(this.hud);
+
+        startAnimatronics(this, this.hud);
     }
 
     showSettings(){
@@ -119,6 +122,7 @@ export class game {
 
     exitGame() {
         console.log("saliendo del juego");
+        stopAnimatronics(this);
         this.setState(GAME_STATES.GAME_OVER);
         // TODO: implementar salida del juego
 

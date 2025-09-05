@@ -9,5 +9,22 @@
     "title": "Settings",
     "languageLabel": "Language:",
     "back": "Back to Menu"
+  },
+  "credits": {
+    "title": "Credits",
+    "team": "Team / Author",
+    "developer": "Developer: ",
+    "artist": "Artist: ",
+    "music": "Music: ",
+    "resources": "External resources",
+    "libs": "Code libraries: ",
+    "thanks": "Acknowledgements",
+    "thanksText": "This project is a non-commercial fangame inspired by Five Nights at Freddy’s, created by Scott Cawthon. Special thanks to Scott for his original work, and to the FNAF community whose creativity, dedication, and passion have inspired countless projects and kept the legacy of the franchise alive. This fangame exists as a tribute to that spirit, and it would not have been possible without the collective enthusiasm and support that the community has shared throughout the years.",
+    "info": "Information",
+    "version": "Version: ",
+    "year": "Year: ",
+    "github": "GitHub:",
+    "githubName": "Bytech Technology",
+    "back": "Back to Menu"
   }
 }

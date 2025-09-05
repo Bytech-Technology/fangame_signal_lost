@@ -4,6 +4,7 @@ import { GAME_STATES } from "./config.js"
 import HUD from "./HUD.js";
 import { initSettings } from "./settings.js";
 import { startAnimatronics, stopAnimatronics } from "./animatronics.js";
+import { initCredits } from "./credits.js";
 
 export class game {
     constructor(config = {}) {
@@ -23,6 +24,7 @@ export class game {
         this.sectionWarning = document.getElementById('warning_screen')
         this.sectionOffice = document.getElementById('ofice')
         this.sectionConfig = document.getElementById('settings')
+        this.sectionCredits = document.getElementById('credits')
 
         // botones
         this.btnPlay = document.getElementById('playBtn')
@@ -37,6 +39,7 @@ export class game {
         this._initMenu()
 
         initSettings(this);
+        initCredits(this);
     }
 
     _initMenu() {
@@ -55,6 +58,7 @@ export class game {
         this.sectionWarning.style.display = 'none';
         this.sectionOffice.style.display = 'none';
         this.sectionConfig.style.display = 'none';
+        this.sectionCredits.style.display = 'none';
 
         switch (newState) {
             case this.GAME_STATES.MENU:
@@ -74,7 +78,7 @@ export class game {
                 break;
 
             case this.GAME_STATES.CREDITS:
-                // TODO: mostrar créditos
+                this.sectionCredits.style.display = "flex"
                 break;
 
             case this.GAME_STATES.NEXT_DAY:

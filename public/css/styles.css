@@ -5,6 +5,8 @@
 @import url(settings.css);
 @import url(camera.css);
 @import url(credits.css);
+@import url(game_over.css);
+
 :root{
     --primary-color:#fff;
     --secundary-color:#000;

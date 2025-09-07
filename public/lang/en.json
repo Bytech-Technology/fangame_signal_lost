@@ -26,5 +26,16 @@
     "github": "GitHub:",
     "githubName": "Bytech Technology",
     "back": "Back to Menu"
+  },
+  "game_over": {
+    "ttitle": "GAME OVER",
+    "retry": "Retry",
+    "menu": "Main Menu",
+    "messages": {
+      "Freddy": "Freddy's laugh breaks the silence, coming closer step by step.\nWhen he arrives, darkness comes first.\nHearing that laughter may be the only thing that saves you.",
+      "Bonnie": "Bonnie lurks in the shadows of the left hallway.\nHis deceptive silence is deadlier than any sound.\nOnly a timely light can reveal his presence.",
+      "Chica": "Chica advances leaving a trail of metal and creaks.\nEach sound announces a hunger that never rests.\nIgnoring those noises opens the door to your end.",
+      "Foxy": "Foxy waits behind the curtain, restless and fierce.\nWhen he runs, no refuge is possible.\nKeeping his cove under watch is the only truce."
+    }
   }
 }

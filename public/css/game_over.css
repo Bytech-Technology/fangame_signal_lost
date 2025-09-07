@@ -1,0 +1,57 @@
+.game_over {
+    display: flex;
+    height: 100vh;
+    justify-items: start;
+    box-shadow: red 0px 0px 80px inset, darkred 0px 0px 30px;
+    justify-content: end;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-position: center center;
+}
+
+.game-over-screen {
+    margin-left: auto;
+    margin-bottom: auto;
+    width: 50%;
+
+    img {
+        width: 100%;
+        object-fit: cover;
+        margin-bottom: .5rem;
+    }
+
+    p {
+        color: #b93434;
+        letter-spacing: 2px;
+        line-height: 30px;
+        font-size: 22px;
+        text-align: start;
+        margin-left: 2rem;
+    }
+}
+
+.game_over .btn {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding: 1rem 3rem;
+
+    button {
+        background: none;
+        border: none;
+        outline: none;
+        color: red;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transition: all .3s ease-in-out;
+        font-weight: bold;
+        font-size: 18px;
+    }
+
+    button {
+        opacity: .7;
+    }
+}

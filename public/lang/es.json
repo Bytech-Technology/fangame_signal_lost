@@ -26,5 +26,16 @@
     "github": "GitHub:",
     "githubName": "Bytech Technology",
     "back": "Volver al Menú"
+  },
+  "game_over": {
+    "ttitle": "FIN DEL JUEGO",
+    "retry": "Reintentar",
+    "menu": "Menú Principal",
+    "messages": {
+      "Freddy": "La risa de Freddy rompe el silencio y se acerca paso a paso.\nCuando llega, la oscuridad lo precede.\nEscuchar esas carcajadas es lo único que puede salvarte.",
+      "Bonnie": "Bonnie acecha en la penumbra del pasillo izquierdo.\nSu silencio engañoso es más letal que cualquier ruido.\nSolo una luz a tiempo puede delatar su presencia.",
+      "Chica": "Chica avanza dejando un rastro de metales y crujidos.\nCada sonido anuncia un hambre que nunca se sacia.\nQuien ignora esos ruidos, abre la puerta a su final.",
+      "Foxy": "Foxy espera tras la cortina, impaciente y feroz.\nCuando corre, no hay refugio posible.\nMantener su guarida bajo vigilancia es la única tregua."
+    }
   }
 }

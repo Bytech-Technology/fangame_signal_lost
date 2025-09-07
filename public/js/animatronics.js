@@ -19,7 +19,8 @@ class Animatronic {
         const oldPos = this.posicion;
 
         if (posibles.length === 0) return;
-        if (this.nombre === "Freddy" && horaActual < 5) return;
+      
+        if (this.nombre === "Freddy" && horaActual < 3) return; // Freddy se movera a las 3AM
 
         let nuevaPosicion;
         if (this.nombre === "Freddy") {
@@ -84,6 +85,7 @@ export function startAnimatronics(gameInstance, hud) {
                 if (anim.posicion === 8) {
                     console.log(`${anim.nombre} te atrapó!`);
                     gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                    gameInstance.showGameOver(anim.nombre)
                     gameInstance.animatronicsActive = false;
                     exportLogs();
 

@@ -1,10 +1,11 @@
-import { startWarningSequence } from "./warning_screen.js";
+import { startWarningSequence, clearWarningTimeouts } from "./warning_screen.js";
 import Office from "./ofice.js";
 import { GAME_STATES } from "./config.js"
 import HUD from "./HUD.js";
 import { initSettings } from "./settings.js";
-import { startAnimatronics, stopAnimatronics } from "./animatronics.js";
+import { Animatronics, startAnimatronics, stopAnimatronics } from "./animatronics.js";
 import { initCredits } from "./credits.js";
+import { initGameOver } from "./game_over.js";
 
 export class game {
     constructor(config = {}) {
@@ -25,6 +26,7 @@ export class game {
         this.sectionOffice = document.getElementById('ofice')
         this.sectionConfig = document.getElementById('settings')
         this.sectionCredits = document.getElementById('credits')
+        this.sectionGameOver = document.getElementById('game_over');
 
         // botones
         this.btnPlay = document.getElementById('playBtn')
@@ -40,6 +42,11 @@ export class game {
 
         initSettings(this);
         initCredits(this);
+        initGameOver(this);
+    
+        this.hud = null;
+        this.Office = null;
+
     }
 
     _initMenu() {
@@ -59,6 +66,7 @@ export class game {
         this.sectionOffice.style.display = 'none';
         this.sectionConfig.style.display = 'none';
         this.sectionCredits.style.display = 'none';
+        this.sectionGameOver.style.display = 'none'
 
         switch (newState) {
             case this.GAME_STATES.MENU:
@@ -86,12 +94,43 @@ export class game {
                 break;
             
             case this.GAME_STATES.GAME_OVER:
-                // TODO: mostrar pantalla de game over
+                this.sectionGameOver.style.display = "flex"
                 break;
         }
     }
 
+    reset(){
+        stopAnimatronics(this);
+
+        // limpiar warning screen
+        clearWarningTimeouts();
+        
+        // Reinicar HUD
+        if(this.hud) {
+            clearInterval(this.hud.batteryInterval);
+            clearInterval(this.hud.clockInterval);
+            
+            if (this.hud.gameOverTimeout) {
+                clearTimeout(this.hud.gameOverTimeout);
+            }
+        }
+        this.hud = null;
+
+        // Reiniciar Oficina
+        this.Office = null;
+
+        // Resetear Flags
+        this.isRunning = false;
+        this.animatronicsActive = false;
+
+        // Resetear posiciones de los animatronicos
+        Object.values(Animatronics).forEach(anim => anim.regresarSpawn());        
+    }
     start() {
+
+        // siempre resetear antes de iniciar
+        this.reset();
+
         // Iniciar juego
         this.isRunning = true
 

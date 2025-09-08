@@ -19,7 +19,6 @@ class Animatronic {
         const oldPos = this.posicion;
 
         if (posibles.length === 0) return;
-      
         if (this.nombre === "Freddy" && horaActual < 3) return; // Freddy se movera a las 3AM
 
         let nuevaPosicion;

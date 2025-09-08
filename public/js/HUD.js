@@ -30,21 +30,42 @@ export default class HUD {
   }
 
   _startClock() {
-    // ejemplo: avanza 1 hora cada 30s (puedes ajustar)
-    const times = ["12 AM","01 AM","02 AM","03 AM","04 AM","05 AM","06 AM"];
-    let index = 0;
+    // hora y minuto iniciales
+    let hour = 12;
+    let minute = 0;
+    let isAM = true;
 
+    this.time = "12:00 AM";
+    this._updateUI();
     this.clockInterval = setInterval(() => {
-      this.time = times[index];
+      // Formatear hora y minuto
+      let displayHour = hour < 10 ? `0${hour}` : hour;
+      let displayMinute = minute < 10 ? `0${minute}` : minute;
+      this.time = `${displayHour}:${displayMinute} ${isAM ? 'AM' : 'PM'}`;
       this._updateUI();
 
-      if (this.time === "06 AM") {
+      // Avanzar minuto
+      minute++;
+
+      if (minute > 59) {
+        minute = 0;
+        hour++;
+
+        // Cambiar AM/PM
+        if (hour === 12) {
+          isAM = !isAM;
+        } else if (hour > 12) {
+          hour = 1;
+        }
+      }
+
+      // Límite del juego (6 AM)
+      if (hour === 6 && isAM) {
         clearInterval(this.clockInterval);
         this.game.setState(this.game.GAME_STATES.NEXT_DAY);
       }
 
-      index = (index + 1) % times.length;
-    }, 30000);
+    }, 2000);
   }
 
   _getBatteryColor(percent) {
@@ -93,7 +114,7 @@ export default class HUD {
         clearInterval(this.batteryInterval); // parar consumo
 
         // ⏳ esperar 3 segundos antes del GAME_OVER
-        setTimeout(() => {
+        this.gameOverTimeout = setTimeout(() => {
           this.game.setState(this.game.GAME_STATES.GAME_OVER);
         }, 50000);
       }

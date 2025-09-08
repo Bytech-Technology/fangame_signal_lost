@@ -46,7 +46,6 @@ export class game {
     
         this.hud = null;
         this.Office = null;
-
     }
 
     _initMenu() {

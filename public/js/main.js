@@ -164,6 +164,7 @@ export class game {
 
     exitGame() {
         console.log("saliendo del juego");
+        stopAnimatronics(this);
         this.setState(GAME_STATES.GAME_OVER);
         // TODO: implementar salida del juego
 

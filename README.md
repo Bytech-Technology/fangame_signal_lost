@@ -73,10 +73,10 @@ npm install
 - ✅ Language configuration: Spanish (ES) and English (EN), more coming soon.
 - ✅ Security cameras: navigate through different rooms of the map.
 - ✅ Power system: manage energy consumption while using cameras and other tools.
-- ⚠️ Animatronic AI: dynamic movement with customizable difficulty levels (0–20).
+- ✅ Animatronic AI: dynamic movement with customizable difficulty levels (0–20).
 - ⚠️ Ambient sounds: effects that change depending on the in-game hour.
-- ⚠️ Game Over screen: special screen when the player loses.
-- ⚠️ Credits screen: currently in development.
+- ✅ Game Over screen: special screen when the player loses.
+- ✅ Credits screen: currently in development.
 
 <br><br>
 

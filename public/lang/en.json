@@ -37,5 +37,9 @@
       "Chica": "Chica advances leaving a trail of metal and creaks.\nEach sound announces a hunger that never rests.\nIgnoring those noises opens the door to your end.",
       "Foxy": "Foxy waits behind the curtain, restless and fierce.\nWhen he runs, no refuge is possible.\nKeeping his cove under watch is the only truce."
     }
+  },
+  "warning":{
+    "headphones": "For the best experience, it is recommended to play with headphones. This will allow you to fully enjoy the atmosphere, sound effects, and immersion",
+    "intenseExperience": "This game is designed to provide an immersive and intense experience. During gameplay, you will encounter: Flashing lights and sudden flashes Loud, piercing sounds and unexpected jumpscares Scenes that may generate tension, fear, or anxiety"
   }
 }

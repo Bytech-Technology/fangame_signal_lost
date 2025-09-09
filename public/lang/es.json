@@ -37,5 +37,9 @@
       "Chica": "Chica avanza dejando un rastro de metales y crujidos.\nCada sonido anuncia un hambre que nunca se sacia.\nQuien ignora esos ruidos, abre la puerta a su final.",
       "Foxy": "Foxy espera tras la cortina, impaciente y feroz.\nCuando corre, no hay refugio posible.\nMantener su guarida bajo vigilancia es la única tregua."
     }
+  },
+  "warning":{
+    "headphones": "Para una mejor experiencia, se recomienda jugar con auriculares. Esto permitirá disfrutar plenamente de la ambientación, los efectos de sonido y la inmersión",
+    "intenseExperience": "Este juego ha sido diseñado para ofrecer una experiencia inmersiva e intensa. Durante la partida vas a encontrarte con: Luces intermitentes y destellos repentinos Sonidos fuertes, estridentes y sobresaltos inesperados Escenas que pueden generar tensión, miedo o ansiedad"
   }
 }

@@ -1,5 +1,5 @@
 // app.js
-const { app, BrowserWindow } = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const path = require("path");
 const express = require("express");
 
@@ -45,6 +45,7 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
+            preload: path.join(__dirname, "preload.js")
         },
     });
 
@@ -59,7 +60,6 @@ function createWindow() {
 }
 
 app.whenReady().then(createWindow);
-
 app.on("window-all-closed", () => {
     // En macOS es común que las apps se mantengan abiertas hasta que el usuario salga explícitamente
     if (process.platform !== "darwin") {
@@ -73,3 +73,9 @@ app.on("activate", () => {
         createWindow();
     }
 });
+
+ipcMain.on("exit-game", () =>{
+    if(mainWindow){
+        mainWindow.close();
+    }
+})

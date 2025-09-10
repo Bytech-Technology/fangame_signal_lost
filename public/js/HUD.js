@@ -22,10 +22,10 @@ export default class HUD {
       this.battery = Math.max(0, this.battery - 1);
       this._updateUI();
 
-      if (this.battery === 0) {
-        clearInterval(this.batteryInterval);
-        this.game.setState(this.game.GAME_STATES.GAME_OVER);
-      }
+      //if (this.battery === 0) {
+      //  clearInterval(this.batteryInterval);
+      //  this.game.setState(this.game.GAME_STATES.GAME_OVER);
+      //}
     }, 10000); // baja 1% cada 10s
   }
 
@@ -113,10 +113,15 @@ export default class HUD {
         this._gameOverTriggered = true; // flag para no repetir
         clearInterval(this.batteryInterval); // parar consumo
 
+        this.game.onlyFreddyActive = true;
+
+        // aca iria la animacion de sonido
+
         // ⏳ esperar 3 segundos antes del GAME_OVER
         this.gameOverTimeout = setTimeout(() => {
+          this.game.showGameOver("Freddy");
           this.game.setState(this.game.GAME_STATES.GAME_OVER);
-        }, 50000);
+        }, 10000);
       }
     } else {
       this.batteryON.style.display = "block";

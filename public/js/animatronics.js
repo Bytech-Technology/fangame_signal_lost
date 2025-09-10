@@ -82,6 +82,10 @@ export function startAnimatronics(gameInstance, hud) {
                 if (!gameInstance.animatronicsActive) break;
 
                 if (anim.posicion === 8) {
+                    if(hud.battery <= 0 && anim.nombre !=="Freddy"){
+                        continue;
+                    }
+
                     console.log(`${anim.nombre} te atrapó!`);
                     gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
                     gameInstance.showGameOver(anim.nombre)

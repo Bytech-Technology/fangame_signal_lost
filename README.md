@@ -41,6 +41,9 @@ Clone the repo and run with **Node + Electron**:
 git clone https://github.com/Bytech-Technology/fangame_signal_lost.git
 cd fangame_signal_lost
 
+# Install Git LFS (required for large assets)
+git lfs install
+
 # Install dependencies
 npm install
 
@@ -56,6 +59,7 @@ npm run start
 * [Express](https://www.npmjs.com/package/express) — backend & routing
 * [EJS](https://www.npmjs.com/package/ejs) — templating engine
 * [Electron](https://www.npmjs.com/package/electron) — desktop runtime
+* [Git LFS](https://git-lfs.com/) — required for large assets (audio, images)
 
 <br>
 

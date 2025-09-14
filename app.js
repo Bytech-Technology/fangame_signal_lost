@@ -1,7 +1,10 @@
-// app.js
-const { app, BrowserWindow, ipcMain } = require("electron");
-const path = require("path");
-const express = require("express");
+import { app, BrowserWindow, ipcMain } from "electron";
+import path from "path";
+import { fileURLToPath } from "url";
+import express from "express";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 let mainWindow;
 
@@ -22,8 +25,8 @@ expressApp.set("view engine", "ejs");
 expressApp.use(express.json());
 expressApp.use(express.urlencoded({ extended: true }));
 expressApp.use(express.static(path.join(__dirname, "public")));
-expressApp.use(express.static(path.join(__dirname, "assets")))
-expressApp.use(express.static("components/"))
+expressApp.use(express.static(path.join(__dirname, "assets")));
+expressApp.use(express.static("components/"));
 
 // Rutas de ejemplo
 expressApp.get("/", (req, res) => {
@@ -45,7 +48,8 @@ function createWindow() {
         webPreferences: {
             nodeIntegration: false,
             contextIsolation: true,
-            preload: path.join(__dirname, "preload.js")
+            preload: path.join(__dirname, "preload.js"),
+            sandbox:false
         },
     });
 
@@ -61,21 +65,19 @@ function createWindow() {
 
 app.whenReady().then(createWindow);
 app.on("window-all-closed", () => {
-    // En macOS es común que las apps se mantengan abiertas hasta que el usuario salga explícitamente
     if (process.platform !== "darwin") {
         app.quit();
     }
 });
 
 app.on("activate", () => {
-    // En macOS vuelve a abrir la ventana si se clickea el icono en el dock
     if (mainWindow === null) {
         createWindow();
     }
 });
 
-ipcMain.on("exit-game", () =>{
-    if(mainWindow){
+ipcMain.on("exit-game", () => {
+    if (mainWindow) {
         mainWindow.close();
     }
-})
+});

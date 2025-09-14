@@ -1,8 +1,9 @@
 import { MAP_LOCATIONS } from "./config.js";
 import { logMovement, exportLogs } from "./logger.js";
+import { SoundManager } from "./sound_manager.js";
 
 class Animatronic {
-    constructor(nombre, spawn, iaLevel, intervaloMin, intervaloMax, rutas, pasosSonido, cancionMuerte) {
+    constructor(nombre, spawn, iaLevel, intervaloMin, intervaloMax, rutas, pasosSonido, cancionMuerte, zonasSonido) {
         this.nombre = nombre;
         this.spawn = spawn;
         this.posicion = spawn;
@@ -12,6 +13,7 @@ class Animatronic {
         this.rutas = rutas;
         this.pasosSonido = pasosSonido;
         this.cancionMuerte = cancionMuerte;
+        this.zonasSonido = zonasSonido || []
     }
 
     mover(horaActual, hud) {
@@ -31,6 +33,10 @@ class Animatronic {
 
         this.posicion = nuevaPosicion;
 
+        if (this.zonasSonido.includes(this.posicion)) {
+            SoundManager.play("animatronics", this.nombre, "steps");
+        }
+
         // Guardar en log
         logMovement(this.nombre, oldPos, this.posicion, hud.time, MAP_LOCATIONS);
     }
@@ -43,19 +49,19 @@ class Animatronic {
 export const Animatronics = {
     Freddy: new Animatronic("Freddy", 2, 8, 20, 40, {
         2: [1], 1: [3], 3: [4], 4: [8]
-    }, "freddy_pasos.mp3", "freddy_song.mp3"),
+    }, "freddy_pasos.mp3", "freddy_song.mp3", [1, 2, 3, 4]),
 
     Foxy: new Animatronic("Foxy", 7, 12, 15, 30, {
         7: [6], 6: [4, 7], 4: [8, 6]
-    }, "foxy_pasos.mp3", "foxy_song.mp3"),
+    }, "foxy_pasos.mp3", "foxy_song.mp3", [4]),
 
     Chica: new Animatronic("Chica", 2, 10, 10, 25, {
         2: [1], 1: [6, 2], 6: [4, 1], 4: [8, 6]
-    }, "chica_pasos.mp3", "chica_song.mp3"),
+    }, "chica_pasos.mp3", "chica_song.mp3", [6, 4]),
 
     Bonnie: new Animatronic("Bonnie", 2, 9, 10, 25, {
         2: [6], 6: [5, 2], 5: [7, 6], 7: [4, 5], 4: [8, 7]
-    }, "bonnie_pasos.mp3", "bonnie_song.mp3"),
+    }, "bonnie_pasos.mp3", "bonnie_song.mp3", [4, 6])
 };
 
 // ----------------
@@ -82,16 +88,29 @@ export function startAnimatronics(gameInstance, hud) {
                 if (!gameInstance.animatronicsActive) break;
 
                 if (anim.posicion === 8) {
-                    if(hud.battery <= 0 && anim.nombre !=="Freddy"){
+                    if (hud.battery <= 0 && anim.nombre !== "Freddy") {
                         continue;
                     }
 
                     console.log(`${anim.nombre} te atrapó!`);
-                    gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
-                    gameInstance.showGameOver(anim.nombre)
                     gameInstance.animatronicsActive = false;
-                    exportLogs();
+                    
+                    const deathSong = SoundManager.channels.animatronics[anim.nombre].death;
+                    if (deathSong){
+                        deathSong.play();
 
+                        SoundManager.once("animatronics",anim.nombre, "death", () =>{
+                            SoundManager.play("sfx", "death");
+                            gameInstance.showGameOver(anim.nombre)
+                            gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                        })
+                    } else {
+                        SoundManager.play("sfx", "death");
+                        gameInstance.showGameOver(anim.nombre);
+                        gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                    }
+
+                    exportLogs();
                     break;
                 }
 

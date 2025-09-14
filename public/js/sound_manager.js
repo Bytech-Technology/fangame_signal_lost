@@ -47,6 +47,10 @@ class SoundManagerClass {
       intro: new Howl({
         src: ["sounds/ambience/intro.mp3"],
         volume: this.volumes.ambience
+      }),
+      Office_Intro: new Howl({
+        src: ["sounds/ambience/intro.mp3"],
+        volume: this.volumes.ambience
       })
     };
 

@@ -1,55 +1,50 @@
-let warningTimeouts = [];
+let cancelSequence = false;
 
-export function clearWarningTimeouts() {
-    warningTimeouts.forEach(id => clearTimeout(id));
-    warningTimeouts = [];
+function delay(ms) {
+    return new Promise(resolve  => setTimeout(resolve, ms));
 }
 
-function showCard(cards, index) {
+export function clearWarningTimeouts() {
+    cancelSequence = true;
+}
+
+async function showCard(cards, index, showDurations, gapTime) {
     const card = cards[index];
     if (!card) return;
 
-
     card.classList.add("visible");
-
-    const showDurations = [5000, 8000]; // primera 5s, segunda 8s
-    const gapTime = 1000;
+    
     const visibleTime = showDurations[index] || 5000;
+    
+    await delay(visibleTime);
+    if (cancelSequence) return;
+    
+    card.classList.remove("visible");
 
-    // guardar el timeout para poder limpiarlo después
-    warningTimeouts.push(setTimeout(() => {
-        card.classList.remove("visible");
+    if (index + 1 < cards.length) {
+        await delay(gapTime)
+        if (cancelSequence) return;
+        await showCard(cards, index + 1, showDurations, gapTime);
+    }
+ }
 
-        warningTimeouts.push(setTimeout(() => {
-            if (index + 1 < cards.length) {
-                showCard(cards, index + 1);
-            }
-        }, gapTime));
-
-    }, visibleTime));
-}
-
-export function startWarningSequence(callback) {
+export async function startWarningSequence(callback) {
     const cards = document.querySelectorAll(".warning_card");
     if (!cards.length) return;
 
-    // 🔥 limpiar todo antes de empezar
-    clearWarningTimeouts();
+    cancelSequence = false;
+
     cards.forEach(card => card.classList.remove("visible"));
  
     const showDurations = [5000, 8000]; // primera 5s, segunda 8s
     const gapTime = 1000; // tiempo entre una y otra
     const initialDelay = 2000;
 
-    warningTimeouts.push(setTimeout(() => {
-        showCard(cards, 0);
+    await delay(initialDelay);
+    if (cancelSequence) return;
 
-        // calcular tiempo total dinámico
-        const totalTime = showDurations.reduce((a, b) => a + b, 0) + gapTime * (cards.length - 1) + initialDelay;
+    await showCard(cards, 0, showDurations, gapTime);
+    if (cancelSequence) return;
 
-        warningTimeouts.push(setTimeout(() => {
-            if (callback) callback();
-        }, totalTime));
-
-    }, initialDelay));
+    if (callback) callback();
 }

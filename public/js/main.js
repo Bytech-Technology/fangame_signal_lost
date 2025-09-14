@@ -151,7 +151,16 @@ export class game {
         this.hud = new HUD(this);
         this.Office = new Office(this.hud);
 
-        startAnimatronics(this, this.hud);
+        const introAudio = SoundManager.channels.ambience["Office_Intro"];
+
+        if (introAudio) {
+            introAudio.play();
+            SoundManager.once("ambience", "Office_Intro", () =>{
+                startAnimatronics(this, this.hud);
+            })
+        } else {
+            startAnimatronics(this, this.hud);
+        }
     }
 
     showSettings(){

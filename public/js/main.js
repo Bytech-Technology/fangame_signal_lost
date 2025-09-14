@@ -6,6 +6,7 @@ import { initSettings } from "./settings.js";
 import { Animatronics, startAnimatronics, stopAnimatronics } from "./animatronics.js";
 import { initCredits } from "./credits.js";
 import { initGameOver } from "./game_over.js";
+import { SoundManager } from "./sound_manager.js"
 
 export class game {
     constructor(config = {}) {
@@ -43,7 +44,9 @@ export class game {
         initSettings(this);
         initCredits(this);
         initGameOver(this);
-    
+        
+        SoundManager.init();
+
         this.hud = null;
         this.Office = null;
     }

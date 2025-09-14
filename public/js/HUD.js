@@ -1,3 +1,5 @@
+import { SoundManager } from "./sound_manager.js";
+
 // HUD.js
 export default class HUD {
   constructor(game) {
@@ -115,14 +117,26 @@ export default class HUD {
 
         this.game.onlyFreddyActive = true;
 
-        // aca iria la animacion de sonido
-
-        // ⏳ esperar 3 segundos antes del GAME_OVER
-        this.gameOverTimeout = setTimeout(() => {
-          this.game.showGameOver("Freddy");
-          this.game.setState(this.game.GAME_STATES.GAME_OVER);
-        }, 10000);
+        SoundManager.play("sfx", "powerdown");
+        
+        const freddySong = SoundManager.channels.animatronics["Freddy"].death;
+        if (freddySong) {
+          freddySong.play();
+          
+          SoundManager.once("animatronics", "Freddy", "death", () =>{
+            SoundManager.play("sfx", "death");  
+            this.game.showGameOver("Freddy");
+            this.game.setState(this.game.GAME_STATES.GAME_OVER);
+          });
+        } else {
+          setTimeout(() => {
+            SoundManager.play("sfx", "death");
+            this.game.showGameOver("Freddy");
+            this.game.setState(this.game.GAME_STATES.GAME_OVER);
+          }, 4000);
+        }
       }
+
     } else {
       this.batteryON.style.display = "block";
       this.batteryOffImg.style.display = "none";

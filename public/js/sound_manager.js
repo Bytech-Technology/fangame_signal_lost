@@ -96,6 +96,22 @@ class SoundManagerClass {
       });
     }
   }
+
+  startAmbienceVariations(){
+    if (this.__variationInterval) clearInterval(this.__variationInterval);
+
+    this.__variationKeys = Object.keys(this.channels.ambience).filter(k => k.startsWith("variation_"));
+    
+    this.__variationInterval = setInterval(() =>{
+      const chance = Math.random();
+      if (chance < 0.3 && this.__variationKeys.length > 0) {
+        const pick = this.__variationKeys[Math.floor(Math.random() * this.__variationKeys.length)]
+        const sound = this.channels.ambience[pick];
+        if (sound) sound.play();
+      }
+    },1500)
+  }
+
 }
 
 export const SoundManager = new SoundManagerClass();

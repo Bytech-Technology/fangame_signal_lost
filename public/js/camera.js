@@ -1,3 +1,5 @@
+import { SoundManager } from "./sound_manager.js";
+
 export default class CameraSystem {
     constructor(cameraDivId, hud) {
         this.cameraDiv = document.getElementById(cameraDivId);
@@ -35,6 +37,8 @@ export default class CameraSystem {
 
         this.cameraDiv.style.display = "block";
         
+        SoundManager.play("sfx", "camera_up")
+        SoundManager.stop("ambience","office" )        
         // Consumir batería 1 por segundo mientras la cámara esté abierta
         if (!this.batteryInterval){
             this.batteryInterval = setInterval(() => {
@@ -46,6 +50,8 @@ export default class CameraSystem {
     }
 
     _hide() {
+        SoundManager.play("sfx", "camera_down");
+        SoundManager.play("ambience","office" ) 
         this.cameraDiv.style.display = "none";
         
 

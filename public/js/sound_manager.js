@@ -34,7 +34,7 @@ class SoundManagerClass {
       this.channels.ambience[key] = new Howl({
         src: [`sounds/ambience/${cfg.src}`],
         loop: cfg.loop || false,
-        volume: this.volumes.ambience
+        volume: (cfg.volume !== undefined ? cfg.volume : 1.0) * this.volumes.ambience
       });
     });
 

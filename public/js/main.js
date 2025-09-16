@@ -46,6 +46,7 @@ export class game {
         initGameOver(this);
         
         SoundManager.init();
+        SoundManager.play("ambience", "menu");
 
         this.hud = null;
         this.Office = null;
@@ -68,19 +69,23 @@ export class game {
         this.sectionOffice.style.display = 'none';
         this.sectionConfig.style.display = 'none';
         this.sectionCredits.style.display = 'none';
-        this.sectionGameOver.style.display = 'none'
+        this.sectionGameOver.style.display = 'none';
 
         switch (newState) {
             case this.GAME_STATES.MENU:
                 this.sectionMenu.style.display = 'flex';
+                SoundManager.play("ambience", "menu");
                 break;
 
             case this.GAME_STATES.WARNING:
                 this.sectionWarning.style.display = 'flex';
+                SoundManager.stop("ambience", "menu");
                 break;
 
             case this.GAME_STATES.OFFICE:
                 this.sectionOffice.style.display = 'block';
+                SoundManager.play("ambience", "office");
+                SoundManager.play("ambience", "night");
                 break;
 
             case this.GAME_STATES.SETTINGS:
@@ -97,6 +102,9 @@ export class game {
             
             case this.GAME_STATES.GAME_OVER:
                 this.sectionGameOver.style.display = "flex"
+                SoundManager.stop("ambience", "office");
+                SoundManager.stop("ambience", "night");
+                
                 break;
         }
     }
@@ -151,11 +159,10 @@ export class game {
         this.hud = new HUD(this);
         this.Office = new Office(this.hud);
 
-        const introAudio = SoundManager.channels.ambience["Office_Intro"];
+        if (SoundManager.channels.ambience["intro"]) {
+            SoundManager.play("ambience", "intro");
 
-        if (introAudio) {
-            introAudio.play();
-            SoundManager.once("ambience", "Office_Intro", () =>{
+            SoundManager.once("ambience", "intro", () =>{
                 startAnimatronics(this, this.hud);
             })
         } else {

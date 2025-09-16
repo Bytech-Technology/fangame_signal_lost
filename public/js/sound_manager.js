@@ -1,5 +1,4 @@
 // sound_manager.js
-import { Animatronics } from "./animatronics.js";
 import { SoundsConfig } from "./sounds_config.js";
 
 class SoundManagerClass {

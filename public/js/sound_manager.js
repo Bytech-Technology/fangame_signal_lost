@@ -1,5 +1,5 @@
 // sound_manager.js
-import { Animatronics } from "./animatronics.js";
+import { SoundsConfig } from "./sounds_config.js";
 
 class SoundManagerClass {
   constructor() {
@@ -18,69 +18,33 @@ class SoundManagerClass {
   }
 
   init() {
-    // cargar animatronics
-    Object.values(Animatronics).forEach(anim => {
-      this.channels.animatronics[anim.nombre] = {
-        steps: new Howl({
-          src: [`sounds/animatronics/${anim.pasosSonido}`],
-          volume: 1.0
-        }),
-        death: new Howl({
-          src: [`sounds/animatronics/${anim.cancionMuerte}`],
-          volume: 1.0
-        })
-      };
+    // Animatronics
+   Object.entries(SoundsConfig.animatronics).forEach(([animName, sound]) =>{
+    this.channels.animatronics[animName] = {};
+    Object.entries(sound).forEach(([key, file]) =>{
+      this.channels.animatronics[animName][key] = new Howl({
+        src: [`sounds/animatronics/${file}`],
+        volume: 1.0
+      });
     });
+   });
 
     // Ambience
-    this.channels.ambience = {
-      office: new Howl({
-        src: ["sounds/ambience/office_hum.mp3"],
-        loop: true,
+     Object.entries(SoundsConfig.ambience).forEach(([key, cfg]) => {
+      this.channels.ambience[key] = new Howl({
+        src: [`sounds/ambience/${cfg.src}`],
+        loop: cfg.loop || false,
         volume: this.volumes.ambience
-      }),
-      night: new Howl({
-        src: ["sounds/ambience/ambience_night.mp3"],
-        loop: true,
-        volume: this.volumes.ambience
-      }),
-      intro: new Howl({
-        src: ["sounds/ambience/intro.mp3"],
-        volume: this.volumes.ambience
-      }),
-      Office_Intro: new Howl({
-        src: ["sounds/ambience/intro.mp3"],
-        volume: this.volumes.ambience
-      })
-    };
+      });
+    });
 
     // SFX
-    this.channels.sfx = {
-      door: new Howl({
-        src: ["sounds/sfx/door_close.mp3"],
+    Object.entries(SoundsConfig.sfx).forEach(([key, file]) => {
+      this.channels.sfx[key] = new Howl({
+        src: [`sounds/sfx/${file}`],
         volume: this.volumes.sfx
-      }),
-      light: new Howl({
-        src: ["sounds/sfx/light_switch.mp3"],
-        volume: this.volumes.sfx
-      }),
-      camera: new Howl({
-        src: ["sounds/sfx/camara_sound.mp3"],
-        volume: this.volumes.sfx
-      }),
-      powerdown: new Howl({
-        src: ["sounds/sfx/powerdown.mp3"],
-        volume: this.volumes.sfx
-      }),
-      death: new Howl({
-        src: ["sounds/sfx/jumpscare.mp3"],
-        volume: this.volumes.sfx
-      }),
-      victory: new Howl({
-        src: ["sounds/sfx/victoria_time.mp3"],
-        volume: this.volumes.sfx
-      })
-    };
+      });
+    });
   }
 
   // play simple
@@ -132,6 +96,22 @@ class SoundManagerClass {
       });
     }
   }
+
+  startAmbienceVariations(){
+    if (this.__variationInterval) clearInterval(this.__variationInterval);
+
+    this.__variationKeys = Object.keys(this.channels.ambience).filter(k => k.startsWith("variation_"));
+    
+    this.__variationInterval = setInterval(() =>{
+      const chance = Math.random();
+      if (chance < 0.3 && this.__variationKeys.length > 0) {
+        const pick = this.__variationKeys[Math.floor(Math.random() * this.__variationKeys.length)]
+        const sound = this.channels.ambience[pick];
+        if (sound) sound.play();
+      }
+    },1500)
+  }
+
 }
 
 export const SoundManager = new SoundManagerClass();

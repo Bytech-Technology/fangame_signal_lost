@@ -119,23 +119,22 @@ export default class HUD {
 
         SoundManager.play("sfx", "powerdown");
         
-        const freddySong = SoundManager.channels.animatronics["Freddy"].death;
-        if (freddySong) {
-          freddySong.play();
-          
+        SoundManager.once("sfx", "powerdown", null, () =>{
+          const deathSong = SoundManager.channels.animatronics["Freddy"].death;
+          deathSong.play();
+
           SoundManager.once("animatronics", "Freddy", "death", () =>{
-            SoundManager.play("sfx", "death");  
-            this.game.showGameOver("Freddy");
-            this.game.setState(this.game.GAME_STATES.GAME_OVER);
+            const delay = 1000 + Math.random() * 2000;
+            setTimeout(() =>{
+              if (this.game.state !== this.game.GAME_STATES.NEXT_DAY) {
+                SoundManager.play("sfx", "death");  
+                this.game.showGameOver("Freddy");
+                this.game.setState(this.game.GAME_STATES.GAME_OVER);
+              }
+            }, delay); 
           });
-        } else {
-          setTimeout(() => {
-            SoundManager.play("sfx", "death");
-            this.game.showGameOver("Freddy");
-            this.game.setState(this.game.GAME_STATES.GAME_OVER);
-          }, 4000);
-        }
-      }
+        });
+      };
 
     } else {
       this.batteryON.style.display = "block";

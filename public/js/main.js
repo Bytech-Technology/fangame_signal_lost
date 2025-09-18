@@ -160,9 +160,15 @@ export class game {
         this.Office = new Office(this.hud);
 
         if (SoundManager.channels.ambience["intro"]) {
+            SoundManager.introPlaying = true;
             SoundManager.play("ambience", "intro");
 
-            SoundManager.once("ambience", "intro", () =>{
+            SoundManager.once("ambience", "intro",null, () =>{
+                SoundManager.introPlaying = false;
+                
+                // Restaurar volumen desde localStorage
+                SoundManager.setVolume("ambience", SoundManager.volumes.ambience);
+              
                 startAnimatronics(this, this.hud);
             })
         } else {

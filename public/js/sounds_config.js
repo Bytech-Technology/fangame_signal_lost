@@ -13,11 +13,12 @@ export const SoundsConfig = {
     night:  { src: "ambiente.ogg", loop: true, volume: 0.2 }
   },
   sfx: {
-    // door: "door_close.mp3",
-    // light: "light_switch.mp3",
-    camera: "camara_sound.mp3",
+    //door: "door_close.mp3",
+    //light: "light_switch.mp3",
     powerdown: "powerdown.mp3",
     death: "jumpscare.mp3",
-    victory: "victoria_time.mp3"
+    victory: "victoria_time.mp3",
+    camera_up: "camara_up.ogg",
+    camera_down: "camara_down.ogg"  
   }
 };

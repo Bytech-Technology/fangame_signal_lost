@@ -94,18 +94,21 @@ export function startAnimatronics(gameInstance, hud) {
                     gameInstance.animatronicsActive = false;
                     
                     const deathSong = SoundManager.channels.animatronics[anim.nombre].death;
-                    if (deathSong){
+                    if (deathSong) {
                         deathSong.play();
-
-                        SoundManager.once("animatronics",anim.nombre, "death", () =>{
-                            SoundManager.play("sfx", "death");
-                            gameInstance.showGameOver(anim.nombre)
-                            gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
-                        })
+                        SoundManager.once("animatronics", anim.nombre, "death", () => {
+                            if (gameInstance.state !== gameInstance.GAME_STATES.NEXT_DAY) {
+                                SoundManager.play("sfx", "death");
+                                gameInstance.showGameOver(anim.nombre);
+                                gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                            }
+                        });
                     } else {
-                        SoundManager.play("sfx", "death");
-                        gameInstance.showGameOver(anim.nombre);
-                        gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                        if (gameInstance.state !== gameInstance.GAME_STATES.NEXT_DAY) {
+                            SoundManager.play("sfx", "death");
+                            gameInstance.showGameOver(anim.nombre);
+                            gameInstance.setState(gameInstance.GAME_STATES.GAME_OVER);
+                        }
                     }
 
                     exportLogs();

@@ -167,8 +167,8 @@ export class game {
                 SoundManager.introPlaying = false;
                 
                 // Restaurar volumen desde localStorage
-                SoundManager.setVolume("ambience", SoundManager.volumes.ambience); 
-                
+                SoundManager.setVolume("ambience", SoundManager.volumes.ambience);
+              
                 startAnimatronics(this, this.hud);
             })
         } else {

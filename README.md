@@ -73,7 +73,12 @@ npm run start
 * ✅ **Battery Depletion Logic**: when power = 0, only **Freddy** can kill you, after a short delay.
 * ✅ **Game Over Screen**: unique animations depending on animatronic.
 * ✅ **Credits Screen**: shows developer & contributors.
-* ⚠️ **Ambient Sounds**: planned, change depending on in-game hour.
+
+🚧 Upcoming:
+
+- Ambient sounds per in-game hour
+- More animatronic behaviors
+- Additional languages
 
 <br>
 

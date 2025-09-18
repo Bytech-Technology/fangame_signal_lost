@@ -3,8 +3,7 @@ import { SoundsConfig } from "./sounds_config.js";
 
 class SoundManagerClass {
   constructor() {
-    this.MIN_VOLUME = 0.1;
-
+    this.MIN_VOLUME = 0.1;    
     this.volumes = {
       ambience: Math.max(parseFloat(localStorage.getItem("ambienceVolume")) || 1, this.MIN_VOLUME),
       sfx: Math.max(parseFloat(localStorage.getItem("sfxVolume")) || 1, this.MIN_VOLUME)
@@ -15,6 +14,9 @@ class SoundManagerClass {
       ambience: {},
       sfx: {}
     };
+
+    this.introPlaying = false;
+    this._ducked = false;
   }
 
   init() {
@@ -52,7 +54,13 @@ class SoundManagerClass {
     let sound;
     if (subKey) sound = this.channels[channel]?.[soundKey]?.[subKey];
     else sound = this.channels[channel]?.[soundKey];
-    if (sound) sound.play();
+    if (sound) {
+      if (channel === "animatronics") {
+        this.duckAmbience();
+        sound.once("end", () => this.restoreAmbience());
+      }
+      sound.play();
+    }
   }
 
   stop(channel, soundKey, subKey = null) {
@@ -85,6 +93,10 @@ class SoundManagerClass {
 
   setVolume(channel, value) {
     if (channel === "animatronics") return;
+    if (channel === "ambience" && this.introPlaying){
+      console.log("ignorando cambio de volumen, intro en curso...")
+      return;
+    }
 
     const safeValue = Math.max(value, this.MIN_VOLUME);
     this.volumes[channel] = safeValue;
@@ -96,6 +108,29 @@ class SoundManagerClass {
       });
     }
   }
+
+  duckAmbience() {
+    if (this._ducked) return;
+    this._ducked = true;
+
+    Object.values(this.channels.ambience).forEach(sound => {
+      if (sound && typeof sound.volume === "function") {
+        sound.volume(this.volumes.ambience * 0.3);
+      }
+    })
+  };
+
+  restoreAmbience() {
+    if (!this._ducked) return;
+    this._ducked = false;
+
+    Object.values(this.channels.ambience).forEach(sound => {
+      if (sound && typeof sound.volume === "function") {
+        sound.volume(this.volumes.ambience);
+      }
+    })
+  }
 }
+
 
 export const SoundManager = new SoundManagerClass();

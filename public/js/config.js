@@ -1,3 +1,8 @@
+// -----------------------------------------------------------
+// config.js
+// Contains global game constants and static configurations.
+// -----------------------------------------------------------
+
 export const GAME_STATES ={
     MENU: "menu",
     WARNING: "warning",

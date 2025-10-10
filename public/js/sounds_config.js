@@ -1,8 +1,14 @@
+// -----------------------------------------------------------
+// sounds_config.js
+// Centralized list of all sound assets used in the game.
+// Referenced by sound_manager.js for Howler initialization.
+// -----------------------------------------------------------
+
 export const SoundsConfig = {
   animatronics: {
     Bonnie: { steps: "bonnie_steps.mp3", death: "bonnie_death.mp3" },
     Chica:  { steps: "chica_steps.mp3",  death: "chica_death.mp3" },
-    Foxy:   { steps: "foxy_steps.mp,3",   death: "foxy_death.mp3" },
+    Foxy:   { steps: "foxy_steps.mp3",   death: "foxy_death.mp3" },
     Freddy: { steps: "freddy_steps.mp3", death: "freddy_death.mp3" }
     
   },

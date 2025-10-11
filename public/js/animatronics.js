@@ -118,6 +118,11 @@ function parseHour(timeStr) {
  * Each animatronic moves independently based on AI.
  */
 export function startAnimatronics(gameInstance, hud) {
+    if(!window.DEV_MODE){
+        console.warn("⚙️ Animatronics disabled in DEV_MODE");
+        return;
+    }
+    
     gameInstance.animatronicsActive = true;
 
     Object.values(Animatronics).forEach(anim => {

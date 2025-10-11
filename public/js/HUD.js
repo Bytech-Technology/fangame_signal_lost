@@ -26,8 +26,10 @@ export default class HUD {
     this.batteryEl = document.getElementById("battery-value");
     this.timeEl = document.getElementById("time-value");
 
-    this._startBatteryDrain(); // start automatic battery drain
-    this._startClock();        // start the game clock
+    if (!window.DEV_MODE){
+      this._startBatteryDrain(); // start automatic battery drain
+      this._startClock();        // start the game clock
+    }
     this._updateUI();          // update initial UI
   }
 

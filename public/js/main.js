@@ -15,6 +15,9 @@ import { Animatronics, startAnimatronics, stopAnimatronics } from "./animatronic
 import { initCredits } from "./credits.js";
 import { initGameOver } from "./game_over.js";
 import { SoundManager } from "./sound_manager.js"
+import { initDebugConsole } from "./debug_console.js";
+
+window.DEV_MODE = true; // Set to false to disable debug console
 
 
 /**
@@ -233,4 +236,7 @@ export class game {
 // -----------------------------------------------------------
 document.addEventListener('DOMContentLoaded', () => {
     const myGame = new game();
+    if (window.DEV_MODE) {
+        initDebugConsole(myGame);
+    }
 });
